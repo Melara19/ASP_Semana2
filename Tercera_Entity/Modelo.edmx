@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ASPSemana2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbCiudad">
+          <Key>
+            <PropertyRef Name="Ciu_Id" />
+          </Key>
+          <Property Name="Ciu_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ciu_Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ciu_Id_Dpto" Type="int" />
+          <Property Name="Ciu_UsuCrea" Type="int" />
+          <Property Name="Ciu_FechaCrea" Type="datetime" />
+          <Property Name="Ciu_UsuModifica" Type="int" />
+          <Property Name="Ciu_FechaMidifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbDepartamento">
+          <Key>
+            <PropertyRef Name="Dept_Id" />
+          </Key>
+          <Property Name="Dept_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dept_Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Dept_UsuCrea" Type="int" />
+          <Property Name="Dept_FechaCrea" Type="datetime" />
+          <Property Name="Dept_UsuModifica" Type="int" />
+          <Property Name="Dept_FechaMidifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Emp_Apellido" Type="nvarchar" MaxLength="100" />
+          <Property Name="Emp_Sexo" Type="nvarchar" MaxLength="1" />
+          <Property Name="Emp_Edad" Type="int" />
+          <Property Name="Emp_Ciudad" Type="int" />
+          <Property Name="Emp_UsuCrea" Type="int" />
+          <Property Name="Emp_FechaCrea" Type="datetime" />
+          <Property Name="Emp_UsuModifica" Type="int" />
+          <Property Name="Emp_FechaMidifica" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Ciu_Id">
+          <End Role="tbCiudad" Type="Self.tbCiudad" Multiplicity="0..1" />
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCiudad">
+              <PropertyRef Name="Ciu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="Emp_Ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ciu_Id_Dpto">
+          <End Role="tbDepartamento" Type="Self.tbDepartamento" Multiplicity="0..1" />
+          <End Role="tbCiudad" Type="Self.tbCiudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamento">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="tbCiudad">
+              <PropertyRef Name="Ciu_Id_Dpto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ASPSemana2ModelStoreContainer">
+          <EntitySet Name="tbCiudad" EntityType="Self.tbCiudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ciu_Id" Association="Self.FK_Ciu_Id">
+            <End Role="tbCiudad" EntitySet="tbCiudad" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ciu_Id_Dpto" Association="Self.FK_Ciu_Id_Dpto">
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+            <End Role="tbCiudad" EntitySet="tbCiudad" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ASPSemana2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ASPSemana2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbCiudad" EntityType="ASPSemana2Model.tbCiudad" />
+          <EntitySet Name="tbDepartamento" EntityType="ASPSemana2Model.tbDepartamento" />
+          <EntitySet Name="tbEmpleados" EntityType="ASPSemana2Model.tbEmpleados" />
+          <AssociationSet Name="FK_Ciu_Id" Association="ASPSemana2Model.FK_Ciu_Id">
+            <End Role="tbCiudad" EntitySet="tbCiudad" />
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ciu_Id_Dpto" Association="ASPSemana2Model.FK_Ciu_Id_Dpto">
+            <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+            <End Role="tbCiudad" EntitySet="tbCiudad" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbCiudad">
+          <Key>
+            <PropertyRef Name="Ciu_Id" />
+          </Key>
+          <Property Name="Ciu_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ciu_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ciu_Id_Dpto" Type="Int32" />
+          <Property Name="Ciu_UsuCrea" Type="Int32" />
+          <Property Name="Ciu_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="Ciu_UsuModifica" Type="Int32" />
+          <Property Name="Ciu_FechaMidifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ASPSemana2Model.FK_Ciu_Id" FromRole="tbCiudad" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbDepartamento" Relationship="ASPSemana2Model.FK_Ciu_Id_Dpto" FromRole="tbCiudad" ToRole="tbDepartamento" />
+        </EntityType>
+        <EntityType Name="tbDepartamento">
+          <Key>
+            <PropertyRef Name="Dept_Id" />
+          </Key>
+          <Property Name="Dept_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dept_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Dept_UsuCrea" Type="Int32" />
+          <Property Name="Dept_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="Dept_UsuModifica" Type="Int32" />
+          <Property Name="Dept_FechaMidifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbCiudad" Relationship="ASPSemana2Model.FK_Ciu_Id_Dpto" FromRole="tbDepartamento" ToRole="tbCiudad" />
+        </EntityType>
+        <EntityType Name="tbEmpleados">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Edad" Type="Int32" />
+          <Property Name="Emp_Ciudad" Type="Int32" />
+          <Property Name="Emp_UsuCrea" Type="Int32" />
+          <Property Name="Emp_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="Emp_UsuModifica" Type="Int32" />
+          <Property Name="Emp_FechaMidifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbCiudad" Relationship="ASPSemana2Model.FK_Ciu_Id" FromRole="tbEmpleados" ToRole="tbCiudad" />
+        </EntityType>
+        <Association Name="FK_Ciu_Id">
+          <End Type="ASPSemana2Model.tbCiudad" Role="tbCiudad" Multiplicity="0..1" />
+          <End Type="ASPSemana2Model.tbEmpleados" Role="tbEmpleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCiudad">
+              <PropertyRef Name="Ciu_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleados">
+              <PropertyRef Name="Emp_Ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ciu_Id_Dpto">
+          <End Type="ASPSemana2Model.tbDepartamento" Role="tbDepartamento" Multiplicity="0..1" />
+          <End Type="ASPSemana2Model.tbCiudad" Role="tbCiudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbDepartamento">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="tbCiudad">
+              <PropertyRef Name="Ciu_Id_Dpto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ASPSemana2ModelStoreContainer" CdmEntityContainer="ASPSemana2Entities1">
+          <EntitySetMapping Name="tbCiudad">
+            <EntityTypeMapping TypeName="ASPSemana2Model.tbCiudad">
+              <MappingFragment StoreEntitySet="tbCiudad">
+                <ScalarProperty Name="Ciu_FechaMidifica" ColumnName="Ciu_FechaMidifica" />
+                <ScalarProperty Name="Ciu_UsuModifica" ColumnName="Ciu_UsuModifica" />
+                <ScalarProperty Name="Ciu_FechaCrea" ColumnName="Ciu_FechaCrea" />
+                <ScalarProperty Name="Ciu_UsuCrea" ColumnName="Ciu_UsuCrea" />
+                <ScalarProperty Name="Ciu_Id_Dpto" ColumnName="Ciu_Id_Dpto" />
+                <ScalarProperty Name="Ciu_Descripcion" ColumnName="Ciu_Descripcion" />
+                <ScalarProperty Name="Ciu_Id" ColumnName="Ciu_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbDepartamento">
+            <EntityTypeMapping TypeName="ASPSemana2Model.tbDepartamento">
+              <MappingFragment StoreEntitySet="tbDepartamento">
+                <ScalarProperty Name="Dept_FechaMidifica" ColumnName="Dept_FechaMidifica" />
+                <ScalarProperty Name="Dept_UsuModifica" ColumnName="Dept_UsuModifica" />
+                <ScalarProperty Name="Dept_FechaCrea" ColumnName="Dept_FechaCrea" />
+                <ScalarProperty Name="Dept_UsuCrea" ColumnName="Dept_UsuCrea" />
+                <ScalarProperty Name="Dept_Descripcion" ColumnName="Dept_Descripcion" />
+                <ScalarProperty Name="Dept_Id" ColumnName="Dept_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEmpleados">
+            <EntityTypeMapping TypeName="ASPSemana2Model.tbEmpleados">
+              <MappingFragment StoreEntitySet="tbEmpleados">
+                <ScalarProperty Name="Emp_FechaMidifica" ColumnName="Emp_FechaMidifica" />
+                <ScalarProperty Name="Emp_UsuModifica" ColumnName="Emp_UsuModifica" />
+                <ScalarProperty Name="Emp_FechaCrea" ColumnName="Emp_FechaCrea" />
+                <ScalarProperty Name="Emp_UsuCrea" ColumnName="Emp_UsuCrea" />
+                <ScalarProperty Name="Emp_Ciudad" ColumnName="Emp_Ciudad" />
+                <ScalarProperty Name="Emp_Edad" ColumnName="Emp_Edad" />
+                <ScalarProperty Name="Emp_Sexo" ColumnName="Emp_Sexo" />
+                <ScalarProperty Name="Emp_Apellido" ColumnName="Emp_Apellido" />
+                <ScalarProperty Name="Emp_Nombre" ColumnName="Emp_Nombre" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
