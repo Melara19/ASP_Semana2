@@ -19,12 +19,12 @@ namespace Tercera_Entity
         }
         public void ListarTabla()
         {
-            DataSet ds = new DataSet();
-            ds = util.ObtenerDs("SELECT * FROM tbCiudad", "T");
+            DataSet d = new DataSet();
+            d = util.ObtenerDs("SELECT * FROM tbCiudad", "T");
             Literal msj = new Literal();
             StringBuilder html = new StringBuilder();
 
-            foreach (DataRow row in ds.Tables["T"].Rows)
+            foreach (DataRow row in d.Tables["T"].Rows)
             {
                 html.Append("<tr><td>" +
                     row["Ciu_Id"] + "</td><td>" +
