@@ -19,8 +19,8 @@ namespace Tercera_Entity
         }
         public void ListarTabla()
         {
-            DataSet d = new DataSet();
-            d = util.ObtenerDs("SELECT * FROM tbCiudad", "T");
+            DataSet s = new DataSet();
+            s = util.ObtenerDs("SELECT * FROM tbCiudad", "T");
             Literal msj = new Literal();
             StringBuilder html = new StringBuilder();
 
